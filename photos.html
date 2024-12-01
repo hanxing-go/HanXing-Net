@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>记忆相册</title>
+	<link rel="stylesheet" type="text/css" href="static/css/photos.css" />
+	<link rel="stylesheet" type="text/css" href="static/css/style.css">
+	<link rel="stylesheet" href="./static/css/root.css">
+
+	<script src="static/js/jquery-3.2.1.min.js"></script>
+
+
+</head>
+<style>
+	body {
+		background-image: url('static/img/background1.jpg');
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+
+	#background-video {
+		position: fixed;
+		/* 固定定位 */
+		top: 0;
+		/* 从页面顶部开始 */
+		left: 0;
+		/* 从页面左侧开始 */
+		width: 100%;
+		/* 设置视频宽度为页面宽度 */
+		height: 100%;
+		/* 设置视频高度为页面高度 */
+		object-fit: cover;
+		/* 保持视频的宽高比例，覆盖整个视口 */
+		z-index: -1;
+		/* 设置视频在所有内容的下面 */
+	}
+</style>
+
+<body>
+	<!-- 背景视频 -->
+	<video autoplay muted loop id="background-video">
+		<source src="static/videos/1.mp4" type="video/mp4">
+		Your browser does not support the video tag.
+	</video>
+
+
+	<div class="welcome">
+		<span class="gradientText">
+			只有炸鸡没有诗 </span>
+		<span class="gradientText">の记忆相册</span>
+	</div>
+	<div id="album"></div>
+
+	<script>
+		// 动态生成 mediaData
+		const totalMediaCount = 12; // 媒体文件总数
+		const mediaData = [];
+
+		for (let i = 1; i <= totalMediaCount; i++) {
+			// if ([1, 2, 4, 6, 8, 10].includes(i)) { // 假设这些编号为视频
+			//     mediaData.push({ type: "video", src: `image/video${i}.mp4` });
+			// } else { // 其余编号为图片
+			//     mediaData.push({ type: "image", src: `image/${i}.jpg` });
+			// }
+			mediaData.push({ type: "image", src: `image/${i}.jpg` });
+		}
+
+		// 动态渲染到相册中
+		const album = document.getElementById('album');
+
+		mediaData.forEach((media) => {
+			const element = document.createElement(media.type === "image" ? "img" : "video");
+			element.src = media.src;
+			element.className = "media-item";
+			element.style.transform = `rotate(${Math.random() * 20 - 10}deg)`;
+			if (media.type === "video") {
+				element.controls = true;
+			}
+			album.appendChild(element);
+		});
+
+		// 点击放大功能
+		album.addEventListener("click", (e) => {
+			if (e.target.classList.contains("media-item")) {
+				const isZoomed = e.target.style.transform.includes("scale(1.5)");
+				e.target.style.transform = isZoomed
+					? `rotate(${Math.random() * 20 - 10}deg)` /* 点击时恢复到原来的角度 */
+					: `scale(1.5) rotate(0deg)`; /* 点击时放大并保持旋转 */
+			}
+		});
+
+	</script>
+	<script src="static/js/sakura.js"></script>
+</body>
+
+</html>

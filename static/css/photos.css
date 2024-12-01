@@ -1,0 +1,48 @@
+/* 全局样式 */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #E7E7E7;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	padding: 20px;
+}
+
+/* 相册容器 */
+#album {
+	display: flex;
+	flex-wrap: wrap;               /* 允许换行 */
+	gap: 30px;                     /* 设置项目间距，增加间隔 */
+	justify-content: space-evenly; /* 水平分配空间 */
+	align-items: center;           /* 垂直居中 */
+	max-width: 100%;                /* 容器宽度占满整个页面 */
+	height: 100%;                   /* 容器高度占满整个页面 */
+}
+
+/* 单个媒体项样式 */
+.media-item {
+	width: auto;                  /* 设置固定宽度 */
+	height: auto;                  /* 高度根据比例调整 */
+	max-height: 330px;             /* 设置最大高度 */
+	max-width: 440px;             /* 设置最大高度 */
+	background-color: #FFFFFF;
+	object-fit: contain;           /* 保持比例 */
+	transition: transform 0.8s ease;
+	cursor: pointer;
+	border: 15px solid #FFFFFF;     /* 添加白色边框 */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+}
+
+/* 媒体项悬停时的放大效果 */
+.media-item:hover {
+	transform: scale(1.5) rotate(0deg);
+}
+
+
